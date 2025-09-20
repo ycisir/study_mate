@@ -1,24 +1,33 @@
-# README
+# study_mate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### requirements
+- postgresql
+- ruby-3.3.9
 
-Things you may want to cover:
+### steps for local dev setup
+```
+1: clone the repo
+git clone https://github.com/ycisir/sample_app
 
-* Ruby version
+2: navigate to the project dir
+cd sample_app
 
-* System dependencies
+3: install dependencies
+bundle install
 
-* Configuration
+4: configure database
+open the config/database.yml file and add the following lines in the default section after pool:
+host: localhost
+username: <%= ENV["DB_USERNAME"] || "postgres" %>
+password: <%= ENV["DB_PASSWORD"] || "" %>
 
-* Database creation
+5: create .env and paste these
+DB_USERNAME=postgres
+DB_PASSWORD=yourpassword
 
-* Database initialization
+6: create db and run migratation
+rails db:create db:migrate
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+7: start dev server
+rails s
+```
