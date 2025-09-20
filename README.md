@@ -7,10 +7,10 @@
 ### steps for local dev setup
 ```
 1: clone the repo
-git clone https://github.com/ycisir/sample_app
+git clone https://github.com/ycisir/study_mate
 
 2: navigate to the project dir
-cd sample_app
+cd study_mate
 
 3: install dependencies
 bundle install
