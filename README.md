@@ -18,13 +18,18 @@
 #### configure database
 - open config/database.yml file
 - add the following lines in the [default] section after [pool]
-```host: localhost```
-```username: <%= ENV["DB_USERNAME"] || "postgres" %>```
-```password: <%= ENV["DB_PASSWORD"] || "" %>```
+
+```
+host: localhost
+username: <%= ENV["DB_USERNAME"] || "postgres" %>
+password: <%= ENV["DB_PASSWORD"] || "" %>
+```
 
 #### create .env and paste these
-```DB_USERNAME=postgres```
-```DB_PASSWORD=yourpassword```
+```
+DB_USERNAME=postgres
+DB_PASSWORD=yourpassword
+```
 
 #### create db and run migratation
 ```rails db:create db:migrate```
