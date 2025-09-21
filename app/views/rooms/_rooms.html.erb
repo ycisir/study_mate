@@ -1,0 +1,14 @@
+<% unless @rooms.empty? %>
+  <% @rooms.each do |room| %>
+  	<%= link_to room_url(room) do %>
+  	  <div class="border p-3 my-3 rounded">
+		<h3><%= room.name %></h3>
+		<p><%= room.desc %></p>
+		<hr class="my-4">
+	  </div>
+  	<% end %>
+  <% end %>
+<% else %>
+	<p>No rooms found!</p>
+<% end %>
+

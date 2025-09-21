@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Study Mate" %></title>
+    <title><%= content_for(:title) || "StudyMate" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -46,7 +46,7 @@
               </li>
             </ul>
           <% else %>
-            <%= button_to "Sign in", new_user_session_path, class: "btn btn-outline-secondary ms-auto" %>
+            <%= button_to "Sign in", new_user_session_path, class: "btn btn-outline-secondary btn-sm ms-auto" %>
           <% end %>
         </div>
       </div>

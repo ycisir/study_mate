@@ -1,16 +1,27 @@
-<p style="color: green"><%= notice %></p>
+<%= content_for(:title, "All rooms")  %>
 
-<% content_for :title, "Rooms" %>
+<div class="row">
+  <div class="col-md-2">
+    <h6>Browse topics</h6>
+  </div>
+  
+  <div class="col-md-7">
+  	<div class="row align-items-center">
+  	  <div class="col-md-6">
+  	  	<h6>Study rooms</h6>
+  	    <small>Total <%= pluralize(@rooms.count, 'room') %> found.</small>
+  	  </div>
 
-<h1>Rooms</h1>
+  	  <div class="col-md-6 text-end">
+  		<%= link_to "Create room", new_room_url, class: "btn btn-success" %>
+  	  </div>
 
-<div id="rooms">
-  <% @rooms.each do |room| %>
-    <%= render room %>
-    <p>
-      <%= link_to "Show this room", room %>
-    </p>
-  <% end %>
+  	</div>
+
+  	<%= render "rooms" %>
+  </div>
+  
+  <div class="col-md-3">
+	<h6>Recent activities</h6>
+  </div>
 </div>
-
-<%= link_to "New room", new_room_path %>

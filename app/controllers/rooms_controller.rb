@@ -1,70 +1,41 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[ show edit update destroy ]
 
-  # GET /rooms or /rooms.json
+  before_action :set_room, only: [:show]
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
-    @rooms = Room.all
+    @rooms = Room.order(created_at: :desc)
   end
 
-  # GET /rooms/1 or /rooms/1.json
+  def new
+    @room = current_user.rooms.new()
+  end
+
+  def create
+    @room = current_user.rooms.create(room_params)
+
+    if params[:room][:topic_name].present?
+      @topic = Topic.find_or_create_by(name: params[:room][:topic_name])
+      @room.topic_id = @topic.id
+    end
+
+    if @room.save
+      redirect_to @room, notice: 'Room was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def show
   end
 
-  # GET /rooms/new
-  def new
-    @room = Room.new
-  end
-
-  # GET /rooms/1/edit
-  def edit
-  end
-
-  # POST /rooms or /rooms.json
-  def create
-    @room = Room.new(room_params)
-
-    respond_to do |format|
-      if @room.save
-        format.html { redirect_to @room, notice: "Room was successfully created." }
-        format.json { render :show, status: :created, location: @room }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /rooms/1 or /rooms/1.json
-  def update
-    respond_to do |format|
-      if @room.update(room_params)
-        format.html { redirect_to @room, notice: "Room was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @room }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /rooms/1 or /rooms/1.json
-  def destroy
-    @room.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to rooms_path, notice: "Room was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def room_params
-      params.require(:room).permit(:name, :desc)
-    end
+  def set_room
+    @room = Room.find(params[:id])
+  end
+
+  def room_params
+    params.require(:room).permit(:name, :desc, :topic_name)
+  end
 end

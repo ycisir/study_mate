@@ -1,27 +1,28 @@
-<%= form_with(model: room) do |form| %>
-  <% if room.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+<%= form_with model: @room do |form| %>
+  <div class="form-group mb-3">
+    <%= form.label "Room name" %>
+    <%= form.text_field :name, class: "form-control" %>
+    <% @room.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 
-      <ul>
-        <% room.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+   <div class="form-group mb-3">
+    <%= form.label "Room topic" %>
+    <%= form.text_field :topic_name, class: "form-control" %>
+    <% @room.errors.full_messages_for(:topic_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group mb-3">
+    <%= form.label "Room description" %>
+    <%= form.text_area :desc, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :desc, style: "display: block" %>
-    <%= form.text_area :desc %>
+    <%= form.submit "Create", class: "btn btn-success" %>
   </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+
 <% end %>
