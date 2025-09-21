@@ -18,8 +18,43 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p> 
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <%= link_to "StudyMate", root_url, class: "navbar-brand" %>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="mx-auto">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+          </div>
+
+          <% if user_signed_in? %> 
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Welcome, <%= current_user.username %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Dashboard</a>
+                  <%= button_to "Sign out", destroy_user_session_url, method: :delete, class: "dropdown-item" %>
+                </div>
+              </li>
+            </ul>
+          <% else %>
+            <%= button_to "Sign in", new_user_session_path, class: "btn btn-outline-secondary ms-auto" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <%= yield %>
+    </div>
+
   </body>
 </html>

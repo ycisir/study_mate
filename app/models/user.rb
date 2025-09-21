@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :rooms
+
+  def username
+    email.split("@").first
+  end
 end
