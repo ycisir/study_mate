@@ -1,0 +1,36 @@
+<%= content_for(:title, "Room - #{@room.name}")  %>
+
+<div style="display: flex;">
+	
+  <div style="width: 80%;">
+  	<%= link_to "back", root_url %>
+
+  	<h3><%= @room.name %> room chat</h3>
+
+  	<div style="min-height: 70vh;">
+
+  	  <% unless @room.messages.empty? %>
+
+	    <% @room.messages.each do |message| %>
+
+	    	<%= render "messages/message", message: message %>
+		  
+		<% end %>
+
+	  <% end %>
+
+  	</div>
+
+
+  	<%= render "messages/form", message: Message.new, room: @room %>
+  	
+  </div>
+
+
+  <div style="width: 20%;">
+  	
+  	<%= render "participants" %>
+  
+  </div>
+
+</div>

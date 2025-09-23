@@ -1,0 +1,15 @@
+<%= pluralize(@room.participants.uniq.count, "participant") %>
+
+<% unless @room.participants.empty? %>
+	
+	<ul>
+		  
+	  <% @room.participants.uniq.each do |participant| %>
+
+			<li>@<%= participant.username %><%= " - host" if participant.id == @room.user_id %></li>
+		
+		<% end %>
+			
+	</ul>
+			
+<% end %>

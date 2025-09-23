@@ -1,0 +1,9 @@
+<p>
+	
+	<b><%= current_user == message.user ? "you" : "@#{message.user.username}" %></b>:
+	
+	<%= message.body %><br>
+	
+	<small><%= message.created_at %></small>
+
+</p>

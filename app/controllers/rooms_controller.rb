@@ -38,4 +38,8 @@ class RoomsController < ApplicationController
   def room_params
     params.require(:room).permit(:name, :desc, :topic_name)
   end
+
+  def message_params
+    params.require(:message).permit(:body)
+  end
 end

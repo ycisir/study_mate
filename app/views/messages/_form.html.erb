@@ -1,0 +1,10 @@
+<%= form_with(model: message, local: true) do |form| %>
+  
+
+  <%= form.text_field :body, placeholder: "Type your message here..." %>
+
+  <%= form.hidden_field :room_id, value: room.id %>
+
+  <%= form.submit "Send" %>
+
+<% end %>

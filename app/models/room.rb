@@ -8,6 +8,6 @@ class Room < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :participants, through: :messages, source: :user
 
-  validates :name, presence: true, format: { with: /\A[A-Z]/}
+  validates :name, presence: true, uniqueness: true, format: { with: /\A[A-Z]/}
   validates :topic_name, presence: true, format: { with: /\A[A-Z]/}
 end

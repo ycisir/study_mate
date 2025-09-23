@@ -1,14 +1,28 @@
 <% unless @rooms.empty? %>
+  
   <% @rooms.each do |room| %>
-  	<%= link_to room_url(room) do %>
-  	  <div class="border p-3 my-3 rounded">
-		<h3><%= room.name %></h3>
-		<p><%= room.desc %></p>
-		<hr class="my-4">
-	  </div>
-  	<% end %>
-  <% end %>
-<% else %>
-	<p>No rooms found!</p>
-<% end %>
+    
+    <div style="margin: 30px 0;">
+      
+      <small>Created by @<%= room.user.username %></small><br>
+      
+      <small><%= time_ago_in_words(room.created_at) %> ago</small><br><br>
+      
+      <h3><%= link_to room.name, room_url(room) %></h3>
+      
+      <p><%= room.desc %></p>
+      
+      <small><%= pluralize(room.participants.uniq.count, 'participant') %> joined</small><br>
+      
+      <small><%= room.topic.name %></small>
 
+    </div>
+    <hr>
+
+  <% end %>
+
+<% else %>
+  
+  No rooms found!
+
+<% end %>
