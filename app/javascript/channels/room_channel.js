@@ -5,6 +5,29 @@ document.addEventListener("turbo:load", () => {
   const room_element = document.getElementById("room-id");
   const room_id = room_element.getAttribute("data-room-id");
 
+  const msgInput = document.getElementById("message_body");
+  const imageInput = document.getElementById("message_image");
+  const sendButton = document.getElementById("send_button");
+
+  const checkMessageAndImage = () => {
+
+    if (msgInput.value.trim() !== "" || imageInput.files.length > 0) {
+
+      sendButton.disabled = false;
+
+    } else {
+
+      sendButton.disabled = true;
+
+    }
+
+  };
+
+  checkMessageAndImage();
+  msgInput.addEventListener("input", checkMessageAndImage);
+  imageInput.addEventListener("change", checkMessageAndImage);
+
+
   consumer.subscriptions.create({ channel: "RoomChannel", room_id: room_id}, {
     connected() {
       console.log("connected to room " + room_id);
@@ -32,13 +55,14 @@ document.addEventListener("turbo:load", () => {
       // }
 
 
-      const msgInput = document.getElementById("message_body");
-      // console.log(msgInput);
-
       const messageContainer = document.getElementById("messages");
       messageContainer.innerHTML = messageContainer.innerHTML + data.html
 
+
+      // reset after send
       msgInput.value = ""
+      imageInput.value = ""
+      sendButton.disabled = true;
 
 
       // console.log(data.participants)
