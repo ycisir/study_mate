@@ -1,36 +1,36 @@
 <%= content_for(:title, "Room - #{@room.name}")  %>
 
+<div id="room-id" data-room-id="<%= @room.id %>"></div>
+
 <div style="display: flex;">
-	
-  <div style="width: 80%;">
-  	<%= link_to "back", root_url %>
 
-  	<h3><%= @room.name %> room chat</h3>
+	<div style="width: 80%;">
 
-  	<div style="min-height: 70vh;">
+		<%= link_to "back", root_url %>
 
-  	  <% unless @room.messages.empty? %>
+		<h3><%= @room.name %> chat</h3>
 
-	    <% @room.messages.each do |message| %>
+		<div style="min-height: 70vh;", id="messages">
 
-	    	<%= render "messages/message", message: message %>
-		  
-		<% end %>
+			<% unless @room.messages.empty? %>
 
-	  <% end %>
+				<% @room.messages.each do |message| %>
 
-  	</div>
+					<p><%= render "messages/message", message: message %></p>
+
+				<% end %>
+
+			<% end %>
+
+		</div>
+
+		<%= render "messages/form", message: Message.new, room: @room %>
+
+	</div>
 
 
-  	<%= render "messages/form", message: Message.new, room: @room %>
-  	
-  </div>
-
-
-  <div style="width: 20%;">
-  	
-  	<%= render "participants" %>
-  
-  </div>
+	<div style="width: 20%;">
+		<%= render "participants", room: @room %>
+	</div>
 
 </div>

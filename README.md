@@ -2,7 +2,9 @@
 
 ### requirements
 - postgresql
+- redis-server
 - ruby-3.3.9
+- rvm (ruby version manager)
 
 ### steps for local dev setup
 

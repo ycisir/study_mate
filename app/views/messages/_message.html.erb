@@ -1,9 +1,11 @@
-<p>
-	
-	<b><%= current_user == message.user ? "you" : "@#{message.user.username}" %></b>:
-	
-	<%= message.body %><br>
-	
-	<small><%= message.created_at %></small>
+<%= message.user.username %>: <%= message.body %><br>
 
-</p>
+<% if message.image.attached? %>
+  <p>
+    <%= image_tag url_for(message.image), width: "250" %>
+  </p>
+<% end %>
+
+<small><%= formatted_timestamp(message.created_at) %></small>
+
+<br><br>
