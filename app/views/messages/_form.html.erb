@@ -3,7 +3,9 @@
 
   <%= form.text_field :body, placeholder: "Type your message here..." %>
 
-  <%= form.file_field :image %>
+  <%= form.file_field :image, id: "message_image" %>
+
+  <%= form.submit "Send", id: "send_button", disabled: true %>
 
   <%= form.hidden_field :room_id, value: room.id %>
 
