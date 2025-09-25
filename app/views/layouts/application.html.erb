@@ -19,27 +19,12 @@
 
   <body>
 
-    <nav>
 
-      <%= link_to_unless_current "StudyMate", root_url %><br><br>
-      
-      <% if user_signed_in? %>
-      
-        Welcome, @<%= current_user.username %>
-      
-        <%= button_to "Sign out", destroy_user_session_url, method: :delete %>
-      
-      <% else %>
-      
-        <%= button_to "Sign in", new_user_session_path %>
-      
-      <% end %>
-    
-    </nav>
-    
-    <hr>
+    <%= render "rooms/navbar" %>
 
-    <%= yield %>
+    <div class="container mt-5">
+      <%= yield %>
+    </div>
 
   </body>
   

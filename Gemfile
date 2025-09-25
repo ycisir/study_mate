@@ -62,3 +62,8 @@ gem "dotenv-rails", "~> 3.1"
 
 gem "devise", "~> 4.9"
 gem "redis", "~> 5.4"
+gem "bootstrap", "~> 5.3"
+
+gem "sassc-rails", "~> 2.1"
+
+gem "font-awesome-rails", "~> 4.7"

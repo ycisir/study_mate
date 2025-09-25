@@ -1,30 +1,28 @@
 <%= content_for(:title, "StudyMate - All rooms") %>
 
 
-<div style="display: flex;">
+<div class="row">
   
-  <div style="width: 20%">
-  
-    topic section
-  
+  <div class="col-sm-3 mb-5">
+    <%= render "topic" %>
   </div>
   
+  <div class="col-sm-6 mb-5">
+    <div class="row">
+      <div class="col">
+        <h5>ROOMS</h5>
+        <small><%= pluralize(@rooms.count, 'room') %> available</small>
+      </div>
+      <div class="col text-end">
+        <%= link_to "New room", new_room_url, class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
 
-  <div style="width: 60%">
-  
-    <%= link_to "Create Room", new_room_url %>
-  
-    <small><%= pluralize(@rooms.count, 'room') %> available</small>
-  
     <%= render "rooms" %>
-  
   </div>
   
-
-  <div style="width: 20%">
-  
-    activity section
-  
+  <div class="col-sm-3">
+    <%= render "activity" %>
   </div>
 
 </div>

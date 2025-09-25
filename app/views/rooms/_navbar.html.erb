@@ -1,0 +1,75 @@
+<nav class="navbar bg-light shadow-sm py-2">
+  <div class="container">
+    <div class="row w-100 align-items-center">
+
+      <div class="col-sm-4">
+        <%= link_to "StudyMate", root_url, class: "navbar-brand" %>
+      </div>
+
+      <div class="col-sm-4">
+
+        <%= form_with url: rooms_path, method: :get, local: true, html: { class: "w-100" } do %>
+          <%= text_field_tag :q, params[:q], placeholder: "Search rooms", class: "form-control" %>
+        <% end %>
+      </div>
+
+      <div class="col-sm-4 text-end">
+        <% if user_signed_in? %>
+          <div class="dropdown">
+            <button class="btn btn-link text-decoration-none text-dark dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              @<%= current_user.username %>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="#">Dashboard</a></li>
+              <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" %></li>
+            </ul>
+          </div>
+        <% else %>
+          <%= button_to "Sign in", new_user_session_path, class: "btn btn-outline-success" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<style>
+@media (max-width: 578px) {
+  .navbar .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .navbar .col-sm-4 {
+    width: 100%;
+    margin-bottom: 1rem; /* Adds space between brand, search, and button */
+  }
+
+  .navbar .form-control {
+    margin: 0 auto;
+  }
+
+  .navbar .dropdown {
+    margin: 0 auto;
+  }
+
+  .navbar .dropdown-menu {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    text-align: center;
+  }
+
+  .navbar .dropdown-toggle {
+    width: 100%;
+  }
+
+  .navbar .btn {
+    width: 100%;
+  }
+}
+
+
+</style>

@@ -4,7 +4,14 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @rooms = Room.order(created_at: :desc)
+    @topics = Topic.last(10)
+
+    if params[:q].present?
+      topic = Topic.find_by_name(params[:q])
+      @rooms = topic ? topic.rooms : Room.where('name ILIKE :q OR "desc" ILIKE :q', q: "%#{params[:q]}%")
+    else
+      @rooms = Room.order(created_at: :desc)
+    end
   end
 
   def new
