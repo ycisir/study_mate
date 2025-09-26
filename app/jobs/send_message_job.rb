@@ -10,7 +10,13 @@ class SendMessageJob < ApplicationJob
       locals: { message: message }
     )
 
-    ActionCable.server.broadcast "room_channel_#{message.room_id}", { html: html, participants: render_participants(room) }
+    activity_html = ApplicationController.renderer.render(
+      partial: 'rooms/recent_activity',
+      locals: { message: message }
+    )
+
+    ActionCable.server.broadcast "room_channel_#{message.room_id}", { html: html, participants: render_participants(room), activity_html: activity_html }
+    ActionCable.server.broadcast "activity_channel", { activity_html: activity_html }
   end
 
   private

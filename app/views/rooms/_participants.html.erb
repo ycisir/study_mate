@@ -1,19 +1,17 @@
 <div id="participants">
 
-	<%= pluralize(room.participants.uniq.count, "participant") %>
+<%= pluralize(room.participants.uniq.count, "participant") %>
 
+<ul>
+	<li><%= "#{room.user.username} - host" %></li>
 	<% unless room.participants.empty? %>
+		<% (room.participants.uniq - [room.user]).each do |participant| %>
 
-		<ul>
+			<li><%= participant.username %></li>
 
-		  <% room.participants.uniq.each do |participant| %>
-
-				<li><%= participant.username %><%= " - host" if participant.id == room.user_id %></li>
-
-			<% end %>
-
-		</ul>
-
+		<% end %>
 	<% end %>
+
+</ul>
 
 </div>

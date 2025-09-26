@@ -17,7 +17,7 @@
           <%= link_to room.name, room_path(room), class: "text-dark text-decoration-none" %>
         </h3>
         <p class="lead">
-          <%= truncate(room.desc, length: 10) %>
+          <%= truncate(room.desc, length: 70) %>
         </p>
 
         <hr class="my-3">
@@ -38,5 +38,5 @@
     </div>
   <% end %>
 <% else %>
-  <p class="text-danger mt-3">No rooms found</p>
+  <p class="text-danger mt-3">No rooms found!</p>
 <% end %>

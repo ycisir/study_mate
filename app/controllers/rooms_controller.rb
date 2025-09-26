@@ -6,6 +6,8 @@ class RoomsController < ApplicationController
   def index
     @topics = Topic.last(10)
 
+    @messages = Message.order(created_at: :desc).last(5)
+
     if params[:q].present?
       topic = Topic.find_by_name(params[:q])
       @rooms = topic ? topic.rooms : Room.where('name ILIKE :q OR "desc" ILIKE :q', q: "%#{params[:q]}%")

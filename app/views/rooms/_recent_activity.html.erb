@@ -1,0 +1,25 @@
+<div id="recent_activity_message_<%= message.id %>" class="toast show mb-3 shadow-none border" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header border-0 mb-0">
+    <strong class="me-auto">
+      <%= link_to "@#{message.user.username}", "#", class: "text-decoration-none" %>
+    </strong>
+    <small class="text-muted"><%= time_ago_in_words(message.created_at) %> ago</small>
+  </div>
+  <div class="toast-body pt-0">
+    <span class="fw-semibold">replied:</span> <%= message.body %>
+    <br>
+    <span class="text-muted">in </span>
+    <%= link_to message.room.name, room_path(message.room), class: "fw-bold text-decoration-none" %>
+  </div>
+</div>
+
+
+
+
+<style>
+  @media (max-width: 578px) {
+    .toast {
+      width: 100%;
+    }
+  }
+</style>
